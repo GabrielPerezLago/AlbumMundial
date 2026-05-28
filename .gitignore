@@ -1,0 +1,8 @@
+album-backend/target
+album-backend/.mvn
+album-backend/.dockerignore
+album-backend/src/main/docker
+album-backend/src/main/resources
+almun-backend/.idea
+.gitignore
+.idea
