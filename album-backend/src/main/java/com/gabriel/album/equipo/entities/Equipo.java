@@ -1,17 +1,20 @@
 package com.gabriel.album.equipo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gabriel.album.carta.model.Carta;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
+import java.util.List;
 
 @Entity
 @Table(name = "equipo", schema = "album")
 public class Equipo extends PanacheEntity {
 
     private String nombre;
-    private String pais;
+    private String continente;
 
 
     public String getNombre() {
@@ -22,16 +25,23 @@ public class Equipo extends PanacheEntity {
         this.nombre = nombre;
     }
 
-    public String getPais() {
-        return pais;
+    public String getContinente() {
+        return continente;
     }
 
-    public void setPais(String pais) {
-        this.pais = pais;
+    public void setContinente(String pais) {
+        this.continente = pais;
     }
 
     @Override
     public String toString() {
-        return "Equipo -> { ID =" + id + "; " + nombre + "; " + pais + "; }" ;
+        return "Equipo -> { ID =" + id + "; " + nombre + "; " + continente + "; }" ;
     }
+
+
+
+    @OneToMany(mappedBy = "equipo")
+    @JsonIgnore
+    public List<Carta> cartas;
+
 }

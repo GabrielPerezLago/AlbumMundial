@@ -4,5 +4,13 @@ album-backend/.dockerignore
 album-backend/src/main/docker
 album-backend/src/main/resources
 almun-backend/.idea
+
+album-frontend/.idea
+album-frontend/.dart_tool
+album-frontend/pubspec.lock
+album-frontend/album_frontend.iml
+album-frontend/.metadata
+
+
 .gitignore
 .idea
