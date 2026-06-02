@@ -1,3 +1,5 @@
+
+.gitignore
 album-backend/target
 album-backend/.mvn
 album-backend/.dockerignore
@@ -10,7 +12,7 @@ album-frontend/.dart_tool
 album-frontend/pubspec.lock
 album-frontend/album_frontend.iml
 album-frontend/.metadata
+album-frontend/build
+album_frontend/build/*
 
-
-.gitignore
 .idea
