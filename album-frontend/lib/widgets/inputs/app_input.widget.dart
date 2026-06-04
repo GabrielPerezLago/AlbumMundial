@@ -2,11 +2,12 @@ import 'package:album_frontend/uitls/AdapterAppUtils.dart';
 import 'package:flutter/material.dart';
 
 class AlbumInput extends StatefulWidget {
-
+  final TextEditingController? controller;
   String? lblText;
   bool isPasswored;
 
   AlbumInput({
+    this.controller,
     this.lblText,
     this.isPasswored = false,
   });
@@ -34,6 +35,7 @@ class _AlbumInput extends State<AlbumInput> {
 
   @override
   Widget build(BuildContext context) => TextField(
+    controller: widget.controller,
     obscureText: _hidden,
       style: TextStyle(
         color: Colors.white
