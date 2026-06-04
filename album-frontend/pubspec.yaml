@@ -35,6 +35,19 @@ dependencies:
   go_router: ^14.0.0
   flutter_swiper_view: ^1.1.8
   cupertino_icons: ^1.0.8
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: 'assets/img/copa.png'
+  windows:
+    generate: true
+    image_path: 'assets/img/copa.png'
+    icon_size: 48
+  macos:
+    generate: true
+    image_path: 'assets/img/copa.png'
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +75,7 @@ flutter:
     - assets/img/album_bg.jpeg
     - assets/img/album_mv_bg.png
     - assets/img/copa.png
+    - assets/img/sobre.png
   fonts:
     - family: Bowlby
       fonts:

@@ -37,6 +37,7 @@ class _AlbumInput extends State<AlbumInput> {
   Widget build(BuildContext context) => TextField(
     controller: widget.controller,
     obscureText: _hidden,
+      autocorrect: true,
       style: TextStyle(
         color: Colors.white
       ),

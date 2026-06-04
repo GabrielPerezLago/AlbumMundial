@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
+  bool isLoading = false;
   final service = LoginService();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
@@ -17,14 +18,14 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  bool isLoading = false;
+
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) => AlbumScafold(
-    child: isLoading ?
+    child: widget.isLoading ?
     Container(
       alignment: Alignment.center,
       child: CircularProgressIndicator(strokeAlign: width(context) * 0.01,)
@@ -32,7 +33,12 @@ class _LoginViewState extends State<LoginView> {
       child: isDesktop ?
 
           //TODO: Vista Desktop
-          LoginDesktop() :
+          LoginDesktop(
+            service: widget.service,
+            nameController: widget.nameController,
+            emailController: widget.emailController,
+            passwordController: widget.passwordController,
+          ) :
 
 
 
