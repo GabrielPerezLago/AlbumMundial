@@ -8,6 +8,8 @@ import jakarta.persistence.*;
 @Table(name="usuario", schema="album")
 public class Usuario extends PanacheEntityBase {
 
+
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public Long id;
@@ -23,6 +25,11 @@ public class Usuario extends PanacheEntityBase {
         this.nombre = nombre;
         this.email = email;
         this.password = password;
+    }
+
+
+    public Long getId() {
+        return id;
     }
 
     public String getEmail() {

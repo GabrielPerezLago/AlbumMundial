@@ -1,17 +1,19 @@
-package com.gabriel.album.carta.utils;
+package com.gabriel.album.carta.services;
 
 import com.gabriel.album.carta.model.Carta;
+import com.gabriel.album.carta.model.CartaDTO;
+import com.gabriel.album.carta.utils.CartaUtils;
 
 import java.util.List;
 
 public class SobresThreadManager implements Runnable {
     private static final CartaUtils UTILS = new CartaUtils();
 
-    private List<Carta> cartas;
-    private List<Carta> sobre;
+    private List<CartaDTO> cartas;
+    private List<CartaDTO> sobre;
     private int size;
 
-    public SobresThreadManager(List<Carta> cartas, List<Carta> sobre, int size) {
+    public SobresThreadManager(List<CartaDTO> cartas, List<CartaDTO> sobre, int size) {
         this.cartas = cartas;
         this.sobre = sobre;
         this.size = size;
@@ -20,7 +22,7 @@ public class SobresThreadManager implements Runnable {
     @Override
     public void run() {
         for (int i = 0; i <= size; i++) {
-            sobre.add(UTILS.getRandomCarta(cartas));
+            sobre.add(UTILS.getRandomCartaDTO(cartas));
         }
     }
 }

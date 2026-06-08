@@ -16,7 +16,7 @@ public class CartaController {
 
     @GET
     public Response getCartas() {
-        return Response.ok(Carta.listAll()).build();
+        return service.getCartas();
     }
 
     @GET
