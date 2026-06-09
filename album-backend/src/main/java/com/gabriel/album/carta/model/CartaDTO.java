@@ -8,7 +8,8 @@ public record CartaDTO(
         Date nacimiento,
         Double peso,
         Double altura,
-        String equipo
+        String equipo,
+        Integer cantidad
 ) {
     public CartaDTO(Carta carta) {
         this(
@@ -17,7 +18,20 @@ public record CartaDTO(
                 carta.getNacimiento(),
                 carta.getPeso(),
                 carta.getAltura(),
-                carta.equipo != null ? carta.equipo.getNombre() : null
+                carta.equipo != null ? carta.equipo.getNombre() : null,
+                null
+        );
+    }
+
+    public CartaDTO(Carta carta, Integer cantidad) {
+        this(
+                carta.getId(),
+                carta.getNombre(),
+                carta.getNacimiento(),
+                carta.getPeso(),
+                carta.getAltura(),
+                carta.equipo != null ? carta.equipo.getNombre() : null,
+                cantidad
         );
     }
 }

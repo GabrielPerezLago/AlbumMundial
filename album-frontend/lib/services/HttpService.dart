@@ -33,4 +33,18 @@ abstract class HttpService  {
 
   }
 
+
+  Future<rest.Response> POST_PATH (String endpoint) async {
+    final URI = Uri.parse('$_URL$endpoint');
+
+    print(URI);
+
+    return await rest.post(
+      URI,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    );
+  }
+
 }

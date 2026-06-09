@@ -16,7 +16,7 @@ public class IntercambioController {
     @POST
     @Path("/intercambio")
     public Response intercambio(IntercambioDTO params) {
-        return service.intercabioCarta(params.idUser(), params.idCartaUsuario(), params.idCartaPedida());
+        return service.intercabioCarta(params.idUsuario(), params.idCartaUsuario(), params.idCartaPedida());
     }
 
     @POST

@@ -36,6 +36,7 @@ dependencies:
   flutter_swiper_view: ^1.1.8
   cupertino_icons: ^1.0.8
   flutter_launcher_icons: ^0.13.1
+  intl: ^0.19.0
 
 flutter_launcher_icons:
   android: true
@@ -76,6 +77,7 @@ flutter:
     - assets/img/album_mv_bg.png
     - assets/img/copa.png
     - assets/img/sobre.png
+    - assets/img/user_icon.png
   fonts:
     - family: Bowlby
       fonts:

@@ -13,7 +13,7 @@ public class AlbumBasicsController {
     private AlbumBasicsService service;
 
     @POST
-    @Path("/cartas-usuario/{idUsuario}")
+    @Path("/repetidas/{idUsuario}")
     public Response getUsuarioCartas(@PathParam("idUsuario") Long idUsuario) {
         return service.getCartasByUsuario(idUsuario);
     }

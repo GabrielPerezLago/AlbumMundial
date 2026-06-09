@@ -11,6 +11,7 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class AlbumBasicsService {
@@ -25,20 +26,17 @@ public class AlbumBasicsService {
         if (usuario == null) return Response.status(Response.Status.NOT_FOUND).entity("El usuario no existe").build();
 
         List<UsuarioCarta> usuarioCartas = UsuarioCarta
-                .find("usuario.id = ?" , usuario.getId())
+                .find("usuario.id = ?1 and cantidad > 1" , usuario.getId())
                 .list();
 
-        List<Carta> cartas = new ArrayList<>();
+        List<Carta> cartas = usuarioCartas.stream()
+                .map(UsuarioCarta::getCarta)
+                .collect(Collectors.toList());
 
-        for (UsuarioCarta usuarioCarta : usuarioCartas) {
-            Carta carta = Carta.findById(usuarioCarta.getCarta().getId());
 
-            if(carta == null) return Response.status(404).entity("Error la carta con id: " + usuarioCarta.getCarta().getId() + " no existe").build();
-
-            cartas.add(carta);
-        }
-
-        List<CartaDTO> cartasDTO = UTILS.parseToCartaDTO(cartas);
+        List<CartaDTO> cartasDTO = usuarioCartas.stream()
+                .map(uc -> new CartaDTO(uc.getCarta(), uc.cantidad))
+                .collect(Collectors.toList());
 
         return Response.ok(cartasDTO).build();
 
@@ -55,20 +53,18 @@ public class AlbumBasicsService {
 
         if (usuario == null) return Response.status(404).entity("El usuario no existe").build();
 
-        List<UsuarioCarta> usuarioCartas = UsuarioCarta
-                .find("usuario.id = ?" , usuario.getId())
-                .list();
+        List<Long> idsTiene = UsuarioCarta
+                .find("usuario.id = ?1" , usuario.getId())
+                .list()
+                .stream()
+                .map(uscar -> ((UsuarioCarta) uscar).getCarta().getId())
+                .collect(Collectors.toList());
 
-        if(usuarioCartas == null) return Response.status(404).entity("El usuario aun no tiene cartas").build();
-
-        List<Carta> noTiene = new ArrayList<>();
-        for (int i = 0; i <= cartas.size(); i++) {
-            Carta carta = cartas.get(i);
-            UsuarioCarta usuarioCarta = usuarioCartas.get(i);
-
-            if (!carta.getId().equals(usuarioCarta.getCarta().getId())) {
-                noTiene.add(carta);
-            }
+        List<Carta> noTiene;
+        if (idsTiene.isEmpty()) {
+            noTiene = Carta.listAll();
+        } else {
+            noTiene = Carta.find("id not in ?1", idsTiene).list();
         }
 
         List<CartaDTO> cartasDto = UTILS.parseToCartaDTO(noTiene);

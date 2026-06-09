@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 class SESSIONDATA {
   static final SESSIONDATA instance = SESSIONDATA._internal();
   SESSIONDATA._internal();
