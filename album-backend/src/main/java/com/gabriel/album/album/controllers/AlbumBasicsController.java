@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.Response;
 
 @Path("/album-basics")
@@ -23,4 +24,12 @@ public class AlbumBasicsController {
     public Response getNoUsuarioCartas(@PathParam("idUsuario") Long idUsuario) {
         return service.getCatasUserNotUser(idUsuario);
     }
+
+    @POST
+    @Path("/page")
+    public Response getPage(@QueryParam("usuario") Long idUsuario, @QueryParam("equipo") Long idEquipo) {
+        return service.getAlbumPage(idUsuario, idEquipo);
+    }
+
+
 }

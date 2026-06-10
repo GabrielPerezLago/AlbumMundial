@@ -43,7 +43,7 @@ class _CromoState extends State<Cromo> {
         color: bgColor,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
-          BoxShadow(color: Colors.black, blurRadius: 20, blurStyle: BlurStyle.solid )
+          BoxShadow(color: Colors.black45, blurRadius: 20, blurStyle: BlurStyle.solid )
         ],
       ),
 
@@ -80,7 +80,7 @@ class _CromoState extends State<Cromo> {
                           Container(
                             padding: EdgeInsets.all(10),
                             alignment: Alignment.centerRight,
-                            child: Text(_carta.equipo.toString().toUpperCase(), style: TextStyle(fontSize: w * 0.03), ),
+                            child: Text(_carta.equipo.toString().toUpperCase(), style: TextStyle(fontSize: w * 0.04), ),
                           ),
                         ],
                       ),

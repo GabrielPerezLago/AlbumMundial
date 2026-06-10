@@ -3,19 +3,28 @@ package com.gabriel.album.equipo.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gabriel.album.carta.model.Carta;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "equipo", schema = "album")
-public class Equipo extends PanacheEntity {
+public class Equipo extends PanacheEntityBase {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
     private String nombre;
     private String continente;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;

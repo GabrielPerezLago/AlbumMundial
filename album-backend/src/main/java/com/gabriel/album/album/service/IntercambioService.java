@@ -10,6 +10,7 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @ApplicationScoped
 public class IntercambioService {
@@ -81,36 +82,24 @@ public class IntercambioService {
         if (usuario == null) {
             return Response.status(404).entity("El usuario no existe").build();
         }
+        for (Map.Entry<Long, Integer> entry: req.cartaCantidad().entrySet()) {
+            Long idCarta = entry.getKey();
+            Integer cantidad = entry.getValue();
 
-        List<UsuarioCarta> CartasList = new ArrayList<>();
-        req.cartaCantidad().forEach((carta, catidad) -> {
-            CartasList.add(
-                    new UsuarioCarta(
-                            usuario,
-                            Carta.findById(carta),
-                            catidad
-                    )
-            );
-        });
+            /// Comprebo que la carta esiota
+            Carta carta =  Carta.findById(idCarta);
+            if (carta == null) return  Response.status(404).entity("La carta no existe").build();
 
-
-        if  (CartasList.isEmpty()) {
-            Response.status(404).entity("Error con las cartas, puede que no existan , por favor compruebe los parametros ").build();
-        }
-
-
-        List<Response> responses = new ArrayList<>();
-
-        for (UsuarioCarta carta : CartasList) {
-            Response res = innerOrCreateCartaToUser(carta);
-            responses.add(res);
-        }
-
-        for (Response res : responses) {
-            if (res.getStatus() >= 400) {
-                return res;
+            ///Compruebo que el usuario ya tiene la carta
+            UsuarioCarta exist = UsuarioCarta.find("usuario.id = ?1 and carta.id = ?2", usuario.getId(), idCarta).firstResult();
+            if (exist == null) {
+                new UsuarioCarta(usuario, carta, cantidad).persist();
+            } else {
+                exist.cantidad += cantidad;
             }
         }
+
+
 
         return Response.ok().entity("Cartas Añadidas con exito").build();
     }

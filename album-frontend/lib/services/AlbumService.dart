@@ -1,11 +1,15 @@
 import 'dart:convert';
 
+import 'package:album_frontend/models/AlbumPage.dart';
 import 'package:album_frontend/models/Carta.dart';
+import 'package:album_frontend/models/SobreDTO.dart';
 import 'package:album_frontend/services/HttpService.dart';
+import 'package:album_frontend/widgets/cards/sobre.widget.dart';
 
 class AlbumService extends HttpService {
   static final String _father_endpoint_albumbasics = '/album-basics';
   static final String _father_endpoint_album = '/album';
+  static final String _father_endpoint_cartas = '/cartas';
 
 
   Future<List<Carta>?> cartasRepetidas(int? idUsuario) async {
@@ -64,6 +68,56 @@ class AlbumService extends HttpService {
     }
   }
 
+  Future<List<SobreDTO>?> getSobres() async {
+    final response = await super.GET('$_father_endpoint_cartas/sobres');
+  
+    try {
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return (data as List)
+            .map((sobre) => SobreDTO.fromJson(sobre))
+            .toList();
+      } else {
+        return null;
+      }
+
+    } catch(ex) {
+      throw Exception("Exception : $ex");
+    }
+  }
+  
+  Future<void> saveCartas(int idUsuario, Map<int, int> cartaCantida) async {
+    try {
+      final res =  await super.POST(
+        '$_father_endpoint_album/save',
+        {
+          'idUsuario': idUsuario,
+          'cartaCantidad':cartaCantida.map(
+                (key, value) => MapEntry(key.toString(), value),
+          ),
+        }
+      );
+    } catch(ex) {
+      throw Exception('Exception: $ex');
+    }
+  }
+
+  Future<AlbumPage?> getAlbumPage(int idUsuario, int idEquipo) async {
+    try {
+      final res = await super.POST_PATH(
+          '$_father_endpoint_albumbasics/page?usuario=$idUsuario&equipo=$idEquipo'
+      );
+      if (res.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(res.body);
+        return AlbumPage.fromJson(data);
+      } else {
+        return null;
+      }
+
+    } catch (ex) {
+      throw Exception('Exception >> $ex');
+    }
+  }
 
   void _validateId(int? id) {
     if (id == null) {

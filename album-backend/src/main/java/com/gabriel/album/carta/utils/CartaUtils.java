@@ -2,6 +2,7 @@ package com.gabriel.album.carta.utils;
 
 import com.gabriel.album.carta.model.Carta;
 import com.gabriel.album.carta.model.CartaDTO;
+import com.gabriel.album.carta.model.SobresDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,5 +24,6 @@ public class CartaUtils {
                 .map(CartaDTO::new)
                 .collect(Collectors.toList());
     }
+
 
 }

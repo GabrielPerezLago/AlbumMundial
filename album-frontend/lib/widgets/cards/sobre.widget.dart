@@ -1,16 +1,35 @@
+import 'package:album_frontend/models/SobreDTO.dart';
 import 'package:album_frontend/uitls/AdapterAppUtils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Sobre extends StatefulWidget {
+  VoidCallback? onClick = (){};
+
+  Sobre({
+    this.onClick
+  });
+
 @override
-  State<Sobre> createState() => _SobreState();
+  State<Sobre> createState() => _SobreState(onClick: onClick!);
 }
 
 class _SobreState extends State<Sobre> {
+  VoidCallback onClick;
+
+  int counter = 0;
+
   double scale = 1.0;
 
+  _SobreState({
+   required this.onClick
+});
+
   void _onTap() async {
+    counter++;
+
+    if (counter >= 3) this.onClick();
+
     setState(() {
       scale = 1.2;
     });

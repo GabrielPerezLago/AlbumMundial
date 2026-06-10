@@ -5,25 +5,29 @@ class AlbumInput extends StatefulWidget {
   final TextEditingController? controller;
   String? lblText;
   bool isPasswored;
+  Function(String)? onChanged;
 
   AlbumInput({
     this.controller,
     this.lblText,
     this.isPasswored = false,
+    this.onChanged
   });
 
 
 
   @override
-  State<StatefulWidget> createState() => _AlbumInput();
+  State<StatefulWidget> createState() => _AlbumInput(onChanged: onChanged);
 }
 
 class _AlbumInput extends State<AlbumInput> {
-
+  Function(String)? onChanged;
   bool _hidden = false;
 
 
-
+  _AlbumInput({
+   this.onChanged
+  });
   @override
   void initState() {
     if (widget.isPasswored) {
@@ -35,6 +39,7 @@ class _AlbumInput extends State<AlbumInput> {
 
   @override
   Widget build(BuildContext context) => TextField(
+    onChanged: onChanged,
     controller: widget.controller,
     obscureText: _hidden,
       autocorrect: true,

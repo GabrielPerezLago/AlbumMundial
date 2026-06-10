@@ -22,7 +22,7 @@ class _HomeLayoutDesktop extends State<HomeLayoutDesktop> {
 
   /// Todo: Manejador de pginas
   int _page = 0;
-  final _pages = [ '/album', '/inventory', '/change'];
+  final _pages = [ '/album', '/inventory', '/change', '/sobres'];
 
   void paginate (int i) {
     setState(() => _page = i);
@@ -45,7 +45,8 @@ class _HomeLayoutDesktop extends State<HomeLayoutDesktop> {
         items: [
             BottomNavigationBarItem(icon: Icon(Icons.amp_stories,), label: 'Album'),
             BottomNavigationBarItem(icon: Icon(Icons.card_travel),label: 'Inventario'),
-            BottomNavigationBarItem(icon: Icon(Icons.change_circle), label: 'Intercambio')
+            BottomNavigationBarItem(icon: Icon(Icons.change_circle), label: 'Intercambio'),
+            BottomNavigationBarItem(icon: Icon(Icons.drafts), label: 'Sobres')
         ]
     ),
   );

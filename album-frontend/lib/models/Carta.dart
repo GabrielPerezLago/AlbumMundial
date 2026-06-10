@@ -8,6 +8,7 @@ class Carta {
   double? altura;
   String? equipo;
   int? cantidad;
+  bool? tiene;
 
   Carta({
     this.id,
@@ -17,6 +18,7 @@ class Carta {
     this.altura,
     this.equipo,
     this.cantidad,
+    this.tiene,
   });
 
   factory Carta.fromJson(Map<String, dynamic> json) => Carta(
@@ -26,7 +28,18 @@ class Carta {
     peso: json['peso'],
     altura: json['altura'],
     equipo: json['equipo'],
-    cantidad: json['cantidad'] ?? null
+    cantidad: json['cantidad'] ?? null,
+    tiene: json['tieneCarta'] ?? null
+  );
+
+  factory Carta.fromJsonToCuantity(Map<String, dynamic> json, int cuantity) => Carta(
+      id: json['id'],
+      nombre: json['nombre'],
+      nacimiento: DateTime.parse(json['nacimiento']),
+      peso: json['peso'],
+      altura: json['altura'],
+      equipo: json['equipo'],
+      cantidad: json['cantidad'] ?? cuantity
   );
 
   List<dynamic> getElemsToList() {

@@ -2,7 +2,6 @@ import 'package:album_frontend/controllers/AlbumController.dart';
 import 'package:album_frontend/models/Carta.dart';
 import 'package:album_frontend/models/SESSION.dart';
 import 'package:album_frontend/uitls/AdapterAppUtils.dart';
-import 'package:album_frontend/views/desktop/home_view_layouts/inventory_desktop.layout.dart';
 import 'package:album_frontend/widgets/cards/cromo.widget.dart';
 import 'package:album_frontend/widgets/loading/progress_indicator.widget.dart';
 import 'package:flutter/cupertino.dart';
