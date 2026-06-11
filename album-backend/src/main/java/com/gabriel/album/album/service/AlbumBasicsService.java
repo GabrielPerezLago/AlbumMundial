@@ -33,10 +33,6 @@ public class AlbumBasicsService {
                 .find("usuario.id = ?1 and cantidad > 1" , usuario.getId())
                 .list();
 
-        List<Carta> cartas = usuarioCartas.stream()
-                .map(UsuarioCarta::getCarta)
-                .collect(Collectors.toList());
-
 
         List<CartaDTO> cartasDTO = usuarioCartas.stream()
                 .map(uc -> new CartaDTO(uc.getCarta(), uc.cantidad))
@@ -51,7 +47,6 @@ public class AlbumBasicsService {
 
     @Transactional
     public Response getCatasUserNotUser(Long idUser) {
-        List<Carta> cartas = Carta.listAll();
 
         Usuario usuario = Usuario.findById(idUser);
 
