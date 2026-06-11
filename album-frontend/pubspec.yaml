@@ -78,6 +78,8 @@ flutter:
     - assets/img/copa.png
     - assets/img/sobre.png
     - assets/img/user_icon.png
+    - assets/img/ronaldo.png
+    - assets/img/lamine.png
   fonts:
     - family: Bowlby
       fonts:

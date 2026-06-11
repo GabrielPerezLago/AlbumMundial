@@ -8,21 +8,22 @@ import 'package:album_frontend/widgets/loading/progress_indicator.widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class InventoryDesktop extends StatefulWidget {
+class InventoryLayout extends StatefulWidget {
   final session = SESSIONDATA.instance;
   final controller = AlbumController();
   VoidCallback? onClick = (){};
 
-  InventoryDesktop({
+
+  InventoryLayout({
     this.onClick,
   });
 
   @override
-  State<StatefulWidget> createState() => _InventoryDesktopState(onClick: onClick);
+  State<StatefulWidget> createState() => _InventoryState(onClick: onClick);
 
 }
 
-class _InventoryDesktopState extends State<InventoryDesktop> {
+class _InventoryState extends State<InventoryLayout> {
 
   VoidCallback? onClick = () {};
 
@@ -32,7 +33,7 @@ class _InventoryDesktopState extends State<InventoryDesktop> {
 
   bool isLoading = true;
 
-  _InventoryDesktopState({
+  _InventoryState({
     this.onClick
   });
 
@@ -75,12 +76,12 @@ class _InventoryDesktopState extends State<InventoryDesktop> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Cromo(
-                              heightPorcent: 0.20,
-                              widthPorcent: 0.15,
+                              heightPorcent: isDesktop ? 0.2: 0.5,
+                              widthPorcent: isDesktop ? 0.15: 0.4,
                               carta: carta
                           ),
                           Text('x ${carta.cantidad.toString()}',
-                            style: TextStyle(fontSize: width(context) * 0.012),)
+                            style: TextStyle(fontSize:  isDesktop ? width(context) * 0.012: width(context) * 0.05)),
                         ],
                       ),
                     )).toList(),

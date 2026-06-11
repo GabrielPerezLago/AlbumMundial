@@ -4,15 +4,21 @@ album-backend/target
 album-backend/.mvn
 album-backend/.dockerignore
 album-backend/src/main/docker
-album-backend/src/main/resources
-almun-backend/.idea
+album-backend/.idea
 
 album-frontend/.idea
 album-frontend/.dart_tool
-album-frontend/pubspec.lock
-album-frontend/album_frontend.iml
 album-frontend/.metadata
 album-frontend/build
-album_frontend/build/*
+album-frontend/build/*
+album-frontend/.flutter-plugins
+album-frontend/.flutter-plugins-dependencies
+
+album-frontend/*.g.dart
+album-frontend/android/.gradle
+album-frontend/android/local.properties
+album-frontend/ios/.symlinks
+album-frontend/ios/Pods/
+album-frontend/windows/flutter/ephemeral/
 
 .idea

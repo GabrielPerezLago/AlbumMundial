@@ -2,7 +2,7 @@ import 'package:album_frontend/controllers/AlbumController.dart';
 import 'package:album_frontend/models/Carta.dart';
 import 'package:album_frontend/models/SESSION.dart';
 import 'package:album_frontend/uitls/AdapterAppUtils.dart';
-import 'package:album_frontend/views/desktop/wizard/repetidas.wzard.dart';
+import 'package:album_frontend/views/wizard/repetidas.wzard.dart';
 import 'package:album_frontend/widgets/cards/cromo.widget.dart';
 import 'package:album_frontend/widgets/inputs/app_input.widget.dart';
 import 'package:album_frontend/widgets/loading/progress_indicator.widget.dart';
@@ -10,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ChangeDeskLayout extends StatefulWidget {
+
   final session = SESSIONDATA.instance;
   final controller = AlbumController();
   @override
@@ -66,8 +67,8 @@ class _ChangeDesckState extends State<ChangeDeskLayout> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Cromo(
-                        heightPorcent: 0.20,
-                        widthPorcent: 0.15,
+                        heightPorcent: isDesktop ? 0.20 : 0.5,
+                        widthPorcent: isDesktop ? 0.15 :  0.4,
                         carta: carta
                     ),
                     ElevatedButton(

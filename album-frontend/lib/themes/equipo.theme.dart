@@ -39,7 +39,7 @@ Map<String, Color> _ThemeEquipo = {
 
   'argelia': const Color(0xFF006233),
   'cabo verde': const Color(0xFF003893),
-  'republica democratica del congo': const Color(0xFF007FFF),
+  'el congo': const Color(0xFF007FFF),
   'costa de marfil': const Color(0xFFFF8200),
   'egipto': const Color(0xFFCE1126),
   'ghana': const Color(0xFFCE1126),

@@ -17,62 +17,47 @@ public class IntercambioService {
 
     @Transactional
     public Response intercabioCarta(Long idUser, Long idCartaOfrecida, Long idCataCambio) {
+        /// Validadcion de ususario
+        Usuario usuario = Usuario.findById(idUser);
+        if (usuario == null) return  Response.status(404).entity("El ususario no existe").build();
 
-        ///  Esto busca si de vrd tenoa la carta que va a cambiar
-        UsuarioCarta cartaUsuario = UsuarioCarta
+        ///  VAlidacion de CartaOfrecida
+        Carta cartaOfrecida = Carta.findById(idCartaOfrecida);
+        if (cartaOfrecida == null) return  Response.status(404).entity("La carta ofrecida no existe").build();
+
+        ///  Esto busca si de vrd tenoa la carta que va a ofrecida
+        UsuarioCarta cartaUsuarioOfrecida = UsuarioCarta
                 .find("usuario.id = ?1 and carta.id = ?2", idUser, idCartaOfrecida)
                 .firstResult();
 
-        if (cartaUsuario == null || cartaUsuario.cantidad <=  1) {
+        if (cartaUsuarioOfrecida == null || cartaUsuarioOfrecida.cantidad <=  1) {
             return Response.status(404).entity("El usuario con "+ idUser + "no tinene esa carta, o no la tinen repetida").build();
         }
 
 
         /// Comprobacion de la existencia de la cata solicitada
-        Carta solicitedCarta = Carta.findById(idCataCambio);
-
-        if (solicitedCarta == null) {
-            return Response.status(404).entity("Error: La carta solicitada no existe").build();
-        }
+        Carta cartaSolicitada = Carta.findById(idCataCambio);
+        if (cartaSolicitada == null) return Response.status(404).entity("Error: La carta solicitada no existe").build();
 
         ///  Comporbacion si tiene la carta solicitada
 
-        UsuarioCarta haveCartaSolicitada = UsuarioCarta
-                .find("usuario.id = ?1 and carta.id = ?2" , idUser, idCataCambio)
-                .firstResult();
-
-        if (haveCartaSolicitada != null && haveCartaSolicitada.cantidad >= 1) {
-            return Response.status(404).entity("El usuario ya tiene la carta solicitada, no se pueden intercambiar por cartas que esten en possession").build();
-        }
+       UsuarioCarta exist = UsuarioCarta
+               .find("usuario.id = ?1 and carta.id = ?2", usuario.id, idCataCambio)
+               .firstResult();
 
 
-        cartaUsuario.cantidad--;
 
-        ///  Insercion de la carta en la base de datos
-        Usuario usuario = Usuario.findById(idUser);
-        Carta carta = Carta.findById(idCataCambio);
+       if (exist == null) {
+           new UsuarioCarta(usuario, cartaSolicitada, 1).persist();
+       }  else {
+           exist.cantidad++;
+       }
 
-        return innerOrCreateCartaToUser(
-                new UsuarioCarta(usuario, carta, 1)
-        );
+        cartaUsuarioOfrecida.cantidad--;
 
+       return Response.ok().entity("Intercambio Realizado con exito").build();
     }
 
-    @Transactional
-    public Response innerOrCreateCartaToUser(UsuarioCarta usuarioCarta) {
-        UsuarioCarta baraja = UsuarioCarta
-                .find("usuario.id = ?1 and carta.id = ?2" , usuarioCarta.getUsuario().getId(), usuarioCarta.getCarta().getId())
-                .firstResult();
-
-        if (baraja == null) {
-            usuarioCarta.persist();
-            return Response.ok(usuarioCarta).build();
-        } else {
-            baraja.cantidad += usuarioCarta.cantidad;
-            return Response.ok(baraja).build();
-        }
-
-    }
 
 
     @Transactional

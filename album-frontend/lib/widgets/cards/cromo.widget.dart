@@ -2,6 +2,7 @@ import 'package:album_frontend/models/Carta.dart';
 import 'package:album_frontend/themes/equipo.theme.dart';
 import 'package:album_frontend/uitls/AdapterAppUtils.dart';
 import 'package:album_frontend/uitls/DateAppUtils.dart';
+import 'package:album_frontend/uitls/ImagenesJugadores.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -65,7 +66,7 @@ class _CromoState extends State<Cromo> {
                 final h = c.maxHeight;
 
                 return SafeArea(child: Column(
-                  spacing: h * 0.05,
+                  spacing: isDesktop ? h * 0.05: h* 0.06,
                   children: [
                     //TODO: Titulo Equipo
                     Expanded(
@@ -80,7 +81,7 @@ class _CromoState extends State<Cromo> {
                           Container(
                             padding: EdgeInsets.all(10),
                             alignment: Alignment.centerRight,
-                            child: Text(_carta.equipo.toString().toUpperCase(), style: TextStyle(fontSize: w * 0.04), ),
+                            child: Text(_carta.equipo.toString().toUpperCase(), style: TextStyle(fontSize: isDesktop ? w * 0.03: w* 0.03), ),
                           ),
                         ],
                       ),
@@ -94,12 +95,12 @@ class _CromoState extends State<Cromo> {
                         children: [
                           Container(
                             child: Image(
-                              image: AssetImage('assets/img/user_icon.png'),
-                              width: w * 0.45,
+                              image: AssetImage(GetImgCarta(_carta.nombre!) ?? 'assets/img/user_icon.png'),
+                              width: w * 0.50,
                             ),
                           ),
                           Container(
-                            child: Text(_carta.nombre.toString().toUpperCase(), style: TextStyle(fontSize: w * 0.07),),
+                            child: Text(_carta.nombre.toString().toUpperCase(), style: TextStyle(fontSize: isDesktop ? w * 0.06: w* 0.06),),
                           )
                         ],
                       ),

@@ -26,6 +26,7 @@ class _HomeLayoutDesktop extends State<HomeLayoutDesktop> {
 
   void paginate (int i) {
     setState(() => _page = i);
+    context.go(_pages[i]);setState(() => _page = i);
     context.go(_pages[i]);
   }
 

@@ -1,10 +1,13 @@
 
+import 'package:album_frontend/uitls/AdapterAppUtils.dart';
 import 'package:album_frontend/views/desktop/home_view_layouts/album_desktop.layout.dart';
-import 'package:album_frontend/views/desktop/home_view_layouts/change_desk.layout.dart';
-import 'package:album_frontend/views/desktop/home_view_layouts/inventory_desktop.layout.dart';
-import 'package:album_frontend/views/desktop/home_view_layouts/sobres_desktop.layout.dart';
+import 'package:album_frontend/views/movile/home_view_layouts/album_movile.layout.dart';
+import 'package:album_frontend/views/public_layouts/change_desk.layout.dart';
+import 'package:album_frontend/views/public_layouts/inventory_desktop.layout.dart';
+import 'package:album_frontend/views/public_layouts/sobres_desktop.layout.dart';
 import 'package:album_frontend/views/home.view.dart';
 import 'package:album_frontend/views/login.view.dart';
+import 'package:album_frontend/views/movile/home_movile.layout.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter router = GoRouter(
@@ -16,16 +19,16 @@ final GoRouter router = GoRouter(
       ),
       ShellRoute(
         builder: (context, state, child) {
-          return HomeView(child: child,);
+          return isDesktop ? HomeView(child: child,) : HomeMovile(child: child);
         },
           routes:[
             GoRoute(
                 path: '/album',
-                builder: (context , state) => AlbumDesktop()
+                builder: (context , state) => isDesktop ? AlbumDesktop() : AlbumMovileLayout()
             ),
             GoRoute(
                 path:'/inventory',
-                builder: (context, state) => InventoryDesktop()
+                builder: (context, state) => InventoryLayout()
             ),
             GoRoute(
                 path: '/change',
@@ -33,7 +36,7 @@ final GoRouter router = GoRouter(
             ),
             GoRoute(
                 path: '/sobres',
-                builder: (context, state) => SobresDesktop()
+                builder: (context, state) => SobresLayout()
             )
           ]
       )

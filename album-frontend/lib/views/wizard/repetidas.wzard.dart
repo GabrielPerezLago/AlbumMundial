@@ -84,12 +84,12 @@ class _RepetidasWizardState extends State<RepetidasWizard> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Cromo(
-                              heightPorcent: 0.20,
-                              widthPorcent: 0.15,
+                              heightPorcent: isDesktop ? 0.20 : 0.5,
+                              widthPorcent: isDesktop ? 0.15 : 0.4,
                               carta: carta
                           ),
                           Text('x ${carta.cantidad.toString()}',
-                            style: TextStyle(fontSize: width(context) * 0.012),)
+                            style: TextStyle(fontSize: isDesktop ? width(context) * 0.012: width(context) * 0.03),)
                         ],
                       ),
                     )).toList(),

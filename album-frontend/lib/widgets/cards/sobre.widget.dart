@@ -50,8 +50,8 @@ Widget build(BuildContext context) {
       duration: Duration(milliseconds: 100),
       curve: Curves.easeInOut,
       child: Container(
-          width: width(context) * 0.2,
-          height: height(context) * 0.25,
+          width: isDesktop ? width(context) * 0.2 : width(context) * 0.5,
+          height: isDesktop ?  height(context) * 0.25: height(context) * 0.6,
           decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           image: DecorationImage(
