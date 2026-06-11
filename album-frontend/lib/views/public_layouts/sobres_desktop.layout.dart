@@ -50,6 +50,10 @@ class _SobresLayoutState extends State<SobresLayout> {
       if (!sobresDTO!.isEmpty) {
           sobres = sobresDTO!.map((sobre) => Sobre(
           onClick: () async {
+            if (isLoading) return;
+
+            isLoading = true;
+
             cartas = sobre.cartas;
             cromos = cartas.map((carta) =>
                 Cromo(
@@ -62,6 +66,7 @@ class _SobresLayoutState extends State<SobresLayout> {
             setState(() {
               sobres.remove(sobre);
               showSobres = false;
+              isLoading = false;
             });
           })).toList();
           isLoading = false;
