@@ -49,8 +49,6 @@ public class IntercambioService {
 
        if (exist == null) {
            new UsuarioCarta(usuario, cartaSolicitada, 1).persist();
-       }  else {
-           exist.cantidad++;
        }
 
         cartaUsuarioOfrecida.cantidad--;
@@ -67,6 +65,7 @@ public class IntercambioService {
         if (usuario == null) {
             return Response.status(404).entity("El usuario no existe").build();
         }
+
         for (Map.Entry<Long, Integer> entry: req.cartaCantidad().entrySet()) {
             Long idCarta = entry.getKey();
             Integer cantidad = entry.getValue();

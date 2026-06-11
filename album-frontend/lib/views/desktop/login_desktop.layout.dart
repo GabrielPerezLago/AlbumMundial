@@ -167,12 +167,13 @@ class _LoginDesktopState extends State<LoginDesktop> {
                     });
                     final response = await widget.service.signup(widget.nameController.text, widget.emailController.text, widget.passwordController.text);
 
-                    if (response) {
+                    if (!response) {
                       setState(() {
                         isLoading = false;
                         _errMsg = "El email o la contraseña no son validos";
                       });
                     } else {
+                      isLoading = false;
                       router.go('/album');
                     }
                   } catch (ex) {

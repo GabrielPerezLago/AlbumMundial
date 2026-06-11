@@ -104,7 +104,7 @@ class _LoginMovileLayoutState extends State<LoginMovileLayout> {
       bool res  = await service!.signup(widget.nameController.text, widget.emailController.text, widget.passwordController.text);
 
       if (res) {
-
+        router.go('/album');
       } else {
         setState(() {
           _errorMsg = "Error algun campo no es valido";
