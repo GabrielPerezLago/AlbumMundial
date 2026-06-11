@@ -17,6 +17,10 @@ public class AuthService {
 
         if (!utils.validateUser(user)) return Response.status(Response.Status.UNAUTHORIZED).entity("Los parametros no son validos o vienen vacíos").build();
 
+        Usuario exist = Usuario.find("email = ?1",  user.getEmail()).firstResult();
+
+        if  (exist != null) return Response.status(404).entity("El usuario ya existe").build();
+
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
 
         user.persist();
@@ -32,6 +36,7 @@ public class AuthService {
     public Response signin(String email,  String password) {
 
         if (!utils.validateEmail(email) || !utils.validatePassword(password)) return Response.status(Response.Status.UNAUTHORIZED).entity("El email o la contraseña no es validos").build();
+
 
         Usuario user = Usuario.find("email", email).firstResult();
 

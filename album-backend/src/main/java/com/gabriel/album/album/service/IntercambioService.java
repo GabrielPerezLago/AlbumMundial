@@ -74,12 +74,13 @@ public class IntercambioService {
             Carta carta =  Carta.findById(idCarta);
             if (carta == null) return  Response.status(404).entity("La carta no existe").build();
 
-            ///Compruebo que el usuario ya tiene la carta
-            UsuarioCarta exist = UsuarioCarta.find("usuario.id = ?1 and carta.id = ?2", usuario.getId(), idCarta).firstResult();
-            if (exist == null) {
+
+            int updated = UsuarioCarta
+                    .update("cantidad = cantidad + ?1 where usuario.id = ?2 and carta.id = ?3",
+                            cantidad, usuario.getId(), idCarta);
+
+            if (updated == 0) {
                 new UsuarioCarta(usuario, carta, cantidad).persist();
-            } else {
-                exist.cantidad += cantidad;
             }
         }
 
